@@ -1,0 +1,101 @@
+﻿@{
+    ViewData["Title"] = "Notifications";
+}
+
+<link href="~/css/AddPicture.css" rel="stylesheet" />
+<link href="~/css/Account.css" rel="stylesheet" />
+<link href="~/css/Privacy.css" rel="stylesheet" />
+<link href="https://cdn.jsdelivr.net/npm/cropperjs/dist/cropper.min.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/cropperjs/dist/cropper.min.js"></script>
+
+
+
+
+
+<div class="container p-0">
+    <h1 class="h3 mb-3">Settings</h1>
+    <div class="row">
+        <div class="col-md-5 col-xl-4">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="card-title mb-0">Profile Settings</h5>
+                </div>
+                <div class="list-group list-group-flush" role="tablist">
+                    <a class="list-group-item list-group-item-action" data-toggle="list" asp-action="Edit" asp-controller="Profile" role="tab">
+                        Account
+                    </a>
+                    <a class="list-group-item list-group-item-action" data-toggle="list" asp-action="Index" asp-controller="PrivacySettings" role="tab">
+                        Privacy and safety
+                    </a>
+                    <a class="list-group-item list-group-item-action active" data-toggle="list" asp-action="Index" asp-controller="Notifications" role="tab">
+                        Notifications
+                    </a>
+                    <a class="list-group-item list-group-item-action" data-toggle="list" href="#" role="tab">
+                        Delete account
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-7 col-xl-8">
+            <div class="tab-content">
+                <div class="tab-pane fade show active" id="account" role="tabpanel">
+                    <div class="card">
+                        <div class="card-header">
+                            <h5 class="card-title mb-0 fw-bold">Notifications settings </h5>
+                        </div>
+                        <div class="list-group-item">
+                            <div class="row align-items-center">
+                                <div class="col">
+                                    <strong class="mb-0">Reaction Notifications</strong>
+                                </div>
+                                <div class="col-auto">
+                                    <div class="form-check form-switch">
+                                        <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked" checked>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="list-group-item">
+                            <div class="row align-items-center">
+                                <div class="col">
+                                    <strong class="mb-0">Comment Notifications</strong>
+                                </div>
+                                <div class="col-auto">
+                                    <div class="form-check form-switch">
+                                        <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked" checked>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="list-group-item">
+                            <div class="row align-items-center">
+                                <div class="col">
+                                    <strong class="mb-0">Message Notifications</strong>
+                                </div>
+                                <div class="col-auto">
+                                    <div class="form-check form-switch">
+                                        <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked" checked>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="list-group-item">
+                            <div class="row align-items-center">
+                                <div class="col">
+                                    <strong class="mb-0">Enable sound for notifications</strong>
+                                </div>
+                                <div class="col-auto">
+                                    <div class="form-check form-switch">
+                                        <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked" checked>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

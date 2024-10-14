@@ -1,0 +1,285 @@
+﻿@model PostPageViewModel
+@inject UserManager<ApplicationUser> userManager
+@{
+    ViewData["Title"] = "Profile Page";
+    var user = await userManager.GetUserAsync(User);
+    var userPic = user.ImagePath;
+}
+
+
+    <link href="~/css/profile.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+    <style>
+
+    </style>
+    <div class="container">
+        <div class="card p-5">
+            <div class="card-body p-0">
+                <div class="row align-items-center ">
+                    <div class="col-lg-4 order-lg-1 order-2">
+                        <div class="d-flex align-items-center justify-content-around m-4">
+                            <div class="text-center">
+                                <i class="fa fa-file fs-6 d-block mb-2"></i>
+                                <h4 class="mb-0 fw-semibold lh-1">938</h4>
+                                <p class="mb-0 fs-4">Posts</p>
+                            </div>
+                            <div class="text-center">
+                                <i class="fa fa-user fs-6 d-block mb-2"></i>
+                                <h4 class="mb-0 fw-semibold lh-1">3,586</h4>
+                                <p class="mb-0 fs-4">Friends</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 mt-n3 order-lg-2 order-1">
+                        <div class="mt-n5">
+                            <div class="d-flex align-items-center justify-content-center mb-2">
+                                <div class="linear-gradient d-flex align-items-center justify-content-center rounded-circle" style="width: 110px; height: 110px;" ;>
+                                    <div class="border border-4 border-white d-flex align-items-center justify-content-center rounded-circle overflow-hidden" style="width: 100px; height: 100px;" ;>
+                                        <img src="https://bootdey.com/img/Content/avatar/avatar1.png" alt class="w-100 h-100">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="text-center">
+                                <h5 class="fs-5 mb-0 fw-semibold">[Profile Full name]</h5>
+                                <p class="mb-0 fs-4">Designer</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="tab-content" id="pills-tabContent">
+            <div class="tab-pane fade show active" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab" tabindex="0">
+                <div class="row">
+                    <div class="col-lg-4">
+                        <div class="card shadow-none border">
+                            <div class="card-body">
+                                <h4 class="fw-semibold mb-3">Introduction</h4>
+                                <p>[Biography]</p>
+                                <ul class="list-unstyled mb-0">
+                                    <li class="d-flex align-items-center gap-3 mb-4">
+                                        <i class="fa fa-briefcase text-dark fs-6"></i>
+                                        <h6 class="fs-4 fw-semibold mb-0">Sir, P P Institute Of Science</h6>
+                                    </li>
+                                    <li class="d-flex align-items-center gap-3 mb-4">
+                                        <i class="fa fa-envelope text-dark fs-6"></i>
+                                        <h6 class="fs-4 fw-semibold mb-0"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="69111013030607081d010807290e04080005470a0604">[email&#160;protected]</a></h6>
+                                    </li>
+                                    <li class="d-flex align-items-center gap-3 mb-4">
+                                        <i class="fa fa-desktop text-dark fs-6"></i>
+                                        <h6 class="fs-4 fw-semibold mb-0">www.xyz.com</h6>
+                                    </li>
+                                    <li class="d-flex align-items-center gap-3 mb-2">
+                                        <i class="fa fa-list text-dark fs-6"></i>
+                                        <h6 class="fs-4 fw-semibold mb-0">Newyork, USA - 100001</h6>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="card shadow-none border">
+                            <div class="card-body">
+                                <h4 class="fw-semibold mb-3">Photos</h4>
+                                <div class="row">
+                                    <div class="col-4">
+                                        <img src="https://bootdey.com/img/Content/avatar/avatar1.png" alt class="rounded-2 img-fluid mb-9">
+                                    </div>
+                                    <div class="col-4">
+                                        <img src="https://bootdey.com/img/Content/avatar/avatar2.png" alt class="rounded-2 img-fluid mb-9">
+                                    </div>
+                                    <div class="col-4">
+                                        <img src="https://bootdey.com/img/Content/avatar/avatar3.png" alt class="rounded-2 img-fluid mb-9">
+                                    </div>
+                                    <div class="col-4">
+                                        <img src="https://bootdey.com/img/Content/avatar/avatar4.png" alt class="rounded-2 img-fluid mb-9">
+                                    </div>
+                                    <div class="col-4">
+                                        <img src="https://bootdey.com/img/Content/avatar/avatar4.png" alt class="rounded-2 img-fluid mb-9">
+                                    </div>
+                                    <div class="col-4">
+                                        <img src="https://bootdey.com/img/Content/avatar/avatar4.png" alt class="rounded-2 img-fluid mb-9">
+                                    </div>
+
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-8">
+                        <div class="card shadow-none border">
+                            <div class="card-body">
+                                <div class="form-floating mb-3">
+                                    <textarea onclick="openPopup()" class="form-control" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 137px"></textarea>
+                                    <label for="floatingTextarea2" class="p-7">Share your thoughts</label>
+                                </div>
+                                <div class="d-flex align-items-center gap-2">
+                                    <a class="text-white d-flex align-items-center justify-content-center bg-primary p-2 fs-4 rounded-circle" href="javascript:void(0)">
+                                        <i class="fa fa-photo"></i>
+                                    </a>
+                                    <a href="javascript:void(0)" class="text-dark px-3 py-2">Photo / Video</a>
+                                    <a href="javascript:void(0)" class="d-flex align-items-center gap-2">
+                                        <div class="text-white d-flex align-items-center justify-content-center bg-secondary p-2 fs-4 rounded-circle">
+                                            <i class="fa fa-list"></i>
+                                        </div>
+                                        <span class="text-dark">Article</span>
+                                    </a>
+                                    <button class="btn btn-primary ms-auto">Post</button>
+                                </div>
+                            </div>
+                        </div>
+                        @foreach(var post in Model.Posts){
+
+                            <div class="card">
+                                <div class="card-body border-bottom">
+                                    <div class="d-flex align-items-center gap-3">
+                                        <img src="~/images/@post.User.ImagePath" alt="[Profile Picture]" class="rounded-circle" width="40" height="40">
+                                    <h6 class="fw-semibold mb-0 fs-4">@post.User.FirstName @post.User.LastName </h6>
+                                        <span class="fs-2"><span class="p-1 bg-light rounded-circle d-inline-block"></span>[Time]</span>
+                                    </div>
+                                    <p class="text-dark my-3">
+                                        @post.PostContent
+                                    </p>
+                                @if(post.Media != null)
+                                {
+                                    string numberClass = post.Media.Count switch
+                                    {
+                                        1 => "one-image",
+                                        2 => "two-images",
+                                        3 => "three-images",
+                                        _ => "four-images"
+                                    };
+
+                                    <div class="image-grid @numberClass w-100">
+                                        @foreach(var media in post.Media)
+                                        {
+                                            <img src="~/PostsMedia/@media.MediaLocation" alt="@media">    
+                                        }
+                                    </div>
+                                }
+
+                                    <div class="d-flex justify-content-center">
+                                        <img src="" alt class="img-fluid rounded-4 object-fit-cover w-100">
+                                    </div>
+                                    <div class="d-flex align-items-center my-3">
+                                        <div class="d-flex align-items-center gap-2">
+                                            <a class="text-white d-flex align-items-center justify-content-center bg-primary p-2 fs-4 rounded-circle" href="javascript:void(0)" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Like">
+                                                <i class="fa fa-thumbs-up"></i>
+                                            </a>
+                                            <span class="text-dark fw-semibold">@post.Reactions.Count</span>
+                                        </div>
+                                        <div class="d-flex align-items-center gap-2 ms-4">
+                                            <a class="text-white d-flex align-items-center justify-content-center bg-secondary p-2 fs-4 rounded-circle" href="javascript:void(0)" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Comment">
+                                                <i class="fa fa-comments"></i>
+                                            </a>
+                                            <span class="text-dark fw-semibold">@post.Comments.Count</span>
+                                        </div>
+                                        <a class="text-dark ms-auto d-flex align-items-center justify-content-center bg-transparent p-2 fs-4 rounded-circle" href="javascript:void(0)" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Share">
+                                            <i class="fa fa-share"></i>
+                                        </a>
+                                    </div>
+                                        <div class="position-relative">
+                                        @foreach(var comment in post.Comments)
+                                        {
+                                           
+
+                                            @*Comment*@
+                                            <div class="p-4 rounded-2 bg-light mb-3">
+                                                <div class="d-flex align-items-center gap-3">
+                                                    <img src="[Commenter Src]" alt="[Commenter Image]" class="rounded-circle" width="33" height="33">
+                                                    <h6 class="fw-semibold mb-0 fs-4"> [Commenter Name]</h6>
+                                                    <span class="fs-2"><span class="p-1 bg-muted rounded-circle d-inline-block"></span> [Comment Time] ago</span>
+                                                </div>
+                                                <p class="my-3">
+                                                    [Comment Content]
+                                                </p>
+
+                                                <div class="d-flex align-items-center">
+                                                    <div class="d-flex align-items-center gap-2">
+                                                        <a class="text-white d-flex align-items-center justify-content-center bg-primary p-2 fs-4 rounded-circle" href="javascript:void(0)" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Like">
+                                                            <i class="fa fa-thumbs-up"></i>
+                                                        </a>
+                                                        <span class="text-dark fw-semibold">[Comment Number of Likes]</span>
+                                                    </div>
+                                                    <div class="d-flex align-items-center gap-2 ms-4">
+                                                        <a class="text-white d-flex align-items-center justify-content-center bg-secondary p-2 fs-4 rounded-circle replyButton" id="[CommentId]" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Reply">
+                                                            <i class="fa-solid fa-reply" id="[CommentId]"></i>
+                                                        </a>
+                                                        <span class="text-dark fw-semibold">[Number of Replies]</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            @*Sub Comments*@
+                                            <div class="p-4 rounded-2 bg-light ms-7">
+                                                <div class="d-flex align-items-center gap-3">
+                                                    <img src="[SubCommenter Image]" alt="[SubCommenter Image]" class="rounded-circle" width="40" height="40">
+                                                    <h6 class="fw-semibold mb-0 fs-4">[SubCommenter Name]</h6>
+                                                    <span class="fs-2"><span class="p-1 bg-muted rounded-circle d-inline-block"></span> [SubComment Time] Ago</span>
+                                                </div>
+                                                <p class="my-3">
+                                                    [SubComment Content]
+                                                </p>
+                                                <div class="d-flex align-items-center">
+                                                    <div class="d-flex align-items-center gap-2">
+                                                        <a class="text-white d-flex align-items-center justify-content-center bg-primary p-2 fs-4 rounded-circle" href="javascript:void(0)" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Like">
+                                                            <i class="fa fa-thumbs-up"></i>
+                                                        </a>
+                                                        <span class="text-dark fw-semibold">[SubComment Number of Likes]</span>
+                                                    </div>
+                                                </div>
+                                                <div class="align-items-center gap-3 p-3 subComment" id="[CommentId]Section">
+
+                                                    <img src="~/Images/@userPic" alt="@userPic" class="rounded-circle" width="33" height="33">
+                                                    <form asp-action="AddComment" asp-controller="Comment" method="post">
+                                                        <input hidden asp-for="CommentViewModel.ParentCommentId">
+                                                        <input asp-for="CommentViewModel.CommentContent" class="form-control py-8" id="exampleInputtext" aria-describedby="textHelp" placeholder="Comment">
+                                                        <button type="submit" class="btn btn-primary">Comment</button>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        }
+
+
+
+
+                                    </div>
+                                </div>
+                            <form asp-action="AddComment" asp-controller="Comment" method="post" class="w-100">
+                                <div class="d-flex align-items-center gap-3 p-3">
+                                    <img src="~/Images/@userPic" alt="profile picture" class="rounded-circle" width="33" height="33">
+
+                                    <input type="hidden" asp-for="CommentViewModel.PostId" value="@post.PostId" />
+
+                                    <input asp-for="CommentViewModel.CommentContent" type="text" class="form-control flex-grow-1" placeholder="Write a comment..." />
+
+                                    <button type="submit" class="btn btn-primary w-auto" style="height: 40px;">Comment</button>
+                                </div>
+                            </form>
+
+                            </div>
+                        }
+                 
+                   
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    @await Html.PartialAsync("CreatePost")
+
+    <script type="text/javascript"></script>
+    <script>
+
+        var replyButtons = Array.from(document.getElementsByClassName("replyButton"));
+
+
+
+        replyButtons.forEach(function (button) {
+            button.addEventListener("click", function () {
+                var subCommentSectionId = this.id + "Section"
+                var SectionDiv = document.getElementById(subCommentSectionId);
+                SectionDiv.style.display = "flex"
+            });
+        })
+
+    </script>

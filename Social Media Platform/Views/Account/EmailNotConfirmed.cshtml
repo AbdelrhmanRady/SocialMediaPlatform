@@ -1,0 +1,106 @@
+﻿@{
+    ViewData["Title"] = "Email Not Confirmed";
+}
+
+
+    <style>
+        .ConfirmationContainer {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .card {
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .card-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+        }
+
+        .card-text {
+            margin-top: 1rem;
+        }
+
+        .btn {
+            margin-top: 1.5rem;
+            padding: 0.75rem 1.5rem;
+        }
+
+        .disabled {
+            pointer-events: none;
+            opacity: 0.5;
+        }
+
+        .success-message {
+            color: green;
+            font-weight: bold;
+            margin-top: 1rem;
+        }
+
+        .error-message {
+            color: red;
+            font-weight: bold;
+            margin-top: 1rem;
+        }
+    </style>
+
+    <div class="ConfirmationContainer">
+        <div class="card text-center">
+            <div class="card-body">
+                <h1 class="card-title">Verify Your Email Address</h1>
+                <p class="card-text">Thank you for registering! To complete your registration, please check your email for a verification link. You need to verify your email address before you can use our services.</p>
+                <p class="card-text">If you haven't received the email, please check your spam folder or <a href="#" id="resend-link">click here</a> to resend the verification email.</p>
+                <p id="timer" style="display: none;"></p>
+                <p id="success-message" class="success-message" style="display: none;">Verification email has been sent!</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const resendLink = document.getElementById('resend-link');
+        const timerElement = document.getElementById('timer');
+        const successMessage = document.getElementById('success-message');
+        let cooldownTime = 2 * 60 * 1000; // 2 minutes in milliseconds
+        let cooldownEnd = 0;
+
+        function updateTimer() {
+            const now = Date.now();
+            if (now < cooldownEnd) {
+                const timeLeft = Math.ceil((cooldownEnd - now) / 1000);
+                timerElement.textContent = `Please wait ${timeLeft} seconds before clicking again.`;
+                resendLink.classList.add('disabled');
+                timerElement.style.display = 'block';
+            } else {
+                resendLink.classList.remove('disabled');
+                timerElement.style.display = 'none';
+            }
+        }
+
+        resendLink.addEventListener('click', (event) => {
+            event.preventDefault();
+
+            const now = Date.now();
+            if (now >= cooldownEnd) {
+
+                const success = true; 
+
+                if (success) {
+                    successMessage.style.display = 'block';
+                } else {
+                    successMessage.style.display = 'none';
+                }
+
+                cooldownEnd = now + cooldownTime;
+                updateTimer();
+                setInterval(updateTimer, 1000);
+            }
+        });
+
+        updateTimer();
+    </script>
+

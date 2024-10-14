@@ -1,0 +1,92 @@
+﻿@inject SignInManager<ApplicationUser> signInManager;
+@inject UserManager<ApplicationUser> UserManager
+
+@{
+    var user = await UserManager.GetUserAsync(User);
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Social_Media_Platform</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <script src="https://kit.fontawesome.com/9c10bb64f2.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/Social_Media_Platform.styles.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/footer.css" asp-append-version="true"/>
+
+
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light border-bottom box-shadow mb-3" style="background-color:#3498db">
+            <div class="container-fluid">
+                @*<a class="navbar-brand text-white" asp-area="" asp-controller="Home" asp-action="Index">facebokbok</a>*@
+                @if (signInManager.IsSignedIn(User))
+                {
+                    
+                    <div class="dropdown navbar-brand text-white" style="margin-right:100px">
+                        <div class="dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <img class="profileCircle" src="~/Images/@user.ImagePath" />
+                        </div>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropitem" asp-action="Edit" asp-controller="Profile">Settings</a></li>
+                            <hr>
+                            <li class="dropitem">
+                                <form asp-action="Logout" asp-controller="Account">
+                                    <button class="btn btn-danger">Logout</button>
+                                </form>
+                            </li>
+                        </ul>
+                    </div>
+                }
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-end text-white">
+                    @if (signInManager.IsSignedIn(User))
+                    {
+                        <div>Left pocket shit </div>
+                    }
+
+                    else
+                    {
+                    <a class="text-white mx-3" asp-controller="Account" asp-action="Register">Register</a>
+                    <a class="text-white" asp-controller="Account" asp-action="Login">Login</a> 
+                    }
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <div class="container">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+
+    <footer>
+        <div class="footer-content">
+            <h3>MySocialMedia</h3>
+            <p>Connect, share, and discover with our vibrant community. Your voice matters—join us today and be part of the conversation.</p>
+            <ul class="socials">
+                <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+                <li><a href="#"><i class="fa fa-twitter"></i></a></li>
+                <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
+                <li><a href="#"><i class="fa fa-youtube"></i></a></li>
+                <li><a href="#"><i class="fa fa-linkedin-square"></i></a></li>
+            </ul>
+        </div>
+
+    </footer>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.3/jquery.validate.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validation-unobtrusive/3.2.11/jquery.validate.unobtrusive.min.js"></script>
+
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

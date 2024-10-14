@@ -1,0 +1,10 @@
+﻿
+.list-group-item {
+    position: relative;
+    display: block;
+    padding: 14px 24px;
+    background-color: #ffffff;
+    border: 1px solid #eef0f3;
+}
+
+

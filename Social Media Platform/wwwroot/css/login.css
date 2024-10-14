@@ -1,0 +1,77 @@
+﻿
+.loginContainer {
+    width: 100%;
+    max-width: 500px;
+    padding: 20px;
+    margin: auto;
+    margin-top:10%;
+    margin-bottom:10%;
+
+    background-color: #ffffff;
+    color: #2c3e50;
+    border-radius: 10px;
+    box-shadow: 0px 0px 20px rgba(189, 195, 199, 0.5);
+}
+
+.loginForm, .ExternalLoginForm {
+    margin: auto;
+    padding: 20px;
+    border-radius: 5px;
+    width: 100%;
+}
+
+.loginForm {
+    margin-bottom: 20px;
+}
+
+.form-label {
+    font-weight: bold;
+}
+
+.form-control {
+    margin-bottom: 15px;
+}
+
+.btn-primary {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    background-color: #3498db;
+    color: #ffffff;
+}
+
+.ExternalLoginForm button {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+    .ExternalLoginForm button i {
+        margin-left: 10px;
+    }
+
+    .ExternalLoginForm button:first-of-type {
+        background-color: #dd4b39;
+    }
+
+    .ExternalLoginForm button:last-of-type {
+        background-color: #3b5998;
+    }
+
+.loginContainer a {
+    color: #2980b9;
+    text-decoration: none;
+    margin-top: 15px;
+    display: block;
+    text-align: center;
+}
+
+a:hover {
+    color: #2980b9;
+}
+
+

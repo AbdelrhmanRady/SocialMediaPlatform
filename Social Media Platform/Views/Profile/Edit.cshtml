@@ -1,0 +1,209 @@
+﻿@model ProfileViewModel
+
+@{
+    ViewData["Title"] = "Account Profile Page";
+}
+
+<link href="~/css/AddPicture.css" rel="stylesheet" />
+<link href="~/css/Account.css" rel="stylesheet" />
+<link href="~/css/Privacy.css" rel="stylesheet" />
+<link href="https://cdn.jsdelivr.net/npm/cropperjs/dist/cropper.min.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/cropperjs/dist/cropper.min.js"></script>
+
+
+    <!-- Modal for cropping -->
+    <div id="cropModal">
+        <h3>Crop your image</h3>
+        <div class="cropper-container">
+            <img id="cropperImage" alt="Crop Image">
+            <div class="circle-overlay"></div>
+        </div>
+        <button class="PictureButton" id="cropButton">Crop</button>
+        <button class="PictureButton" id="cancelButton" class="cancel">Cancel</button>
+    </div>
+
+    <!-- Overlay -->
+    <div id="overlay"></div>
+
+
+    <div class="container p-0">
+        <h1 class="h3 mb-3">Settings</h1>
+        <div class="row">
+            <div class="col-md-5 col-xl-4">
+                <div class="card">
+                    <div class="card-header">
+                        <h5 class="card-title mb-0">Profile Settings</h5>
+                    </div>
+                <div class="list-group list-group-flush" role="tablist">
+                    <a class="list-group-item list-group-item-action active" data-toggle="list" asp-action="Edit" asp-controller="Profile" role="tab">
+                        Account
+                    </a>
+                    <a class="list-group-item list-group-item-action" data-toggle="list" asp-action="Index" asp-controller="PrivacySettings" role="tab">
+                        Privacy and safety
+                    </a>
+                    <a class="list-group-item list-group-item-action" data-toggle="list" asp-action="Index" asp-controller="Notifications" role="tab">
+                        Notifications
+                    </a>
+                    <a class="list-group-item list-group-item-action" data-toggle="list" href="#" role="tab">
+                        Delete account
+                    </a>
+                </div>
+                </div>
+            </div>
+            <div class="col-md-7 col-xl-8">
+                <div class="tab-content">
+                    <div class="tab-pane fade show active" id="account" role="tabpanel">
+                        <div class="card">
+                            <div class="card-header">
+                                <h5 class="card-title mb-0">Public info</h5>
+                            </div>
+                            <div class="card-body">
+                                <form method="post">
+                                    <div asp-validation-summary="All" class="text-danger"></div>
+                                    <input asp-for="ImagePath" type="hidden"  id="croppedImageInput">
+                                    <div class="row">
+                                        <div class="col-md-8">
+                                            <div class="form-group">
+                                                <label for="inputUsername">Biography</label>
+                                                <textarea asp-for="Biography" rows="5" class="form-control" id="inputBio" placeholder="Tell something about yourself"></textarea>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="text-center">
+                                            <img alt="Andrew Jones" id="profilePicturePreview" src="~/Images/@Model.ImagePath" asp-append-version="true" class="rounded-circle img-responsive mt-2" width="128" height="128">
+                                                <div class="mt-2">
+                                                    @*<span class="btn btn-primary"><i class="fa fa-upload"></i></span>*@
+                                                <input type="file" name="file" id="profilePictureInput" class="inputfile" accept="image/*" />
+                                                <label class="uploadLabel" for="profilePictureInput"><i class="fa-solid fa-upload"></i> Choose a file...</label>
+                                                </div>
+                                                <small>For best results, use an image at least 128px by 128px in .jpg format</small>
+                                            </div>
+                                        </div>
+                                    </div>
+                                <div class="form-row">
+                                    <div class="form-group col-md-6">
+                                        <label asp-for="FirstName">First name</label>
+                                        <input asp-for="FirstName" class="form-control" placeholder="First name">
+                                    </div>
+                                    <div class="form-group col-md-6">
+                                        <label asp-for="LastName">Last name</label>
+                                        <input asp-for="LastName"  class="form-control"  placeholder="Last name">
+                                    </div>
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label asp-for="Email">Email</label>
+                                    <input disabled asp-for="Email" class="form-control"  placeholder="Email">
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-group col-md-6">
+                                        <label asp-for="City">City</label>
+                                        <input asp-for="City" class="form-control" >
+                                    </div>
+                                </div>
+                                <div class="mb-3">
+                                    <label asp-for="Gender" class="form-label"></label>
+                                    <select asp-for="Gender" asp-items="Html.GetEnumSelectList<Gender>()" class="form-select">
+                                        <option value="">Please Select</option>
+                                    </select>
+                                </div>
+                                <div class="mb-3">
+                                    <label asp-for="Birthday" class="form-label"></label>
+                                    <input min="1950-01-01" max="2010-12-31" class="form-control" asp-for="Birthday">
+                                </div>
+                                    <button type="submit" class="btn btn-primary saveChanges">Update</button>
+                                </form>
+                            <form asp-action="Logout" asp-controller="Account">
+                                <button type="submit" class="btn btn-danger float-end mt-5">Logout</button>
+                            </form>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+<script>
+
+    const profilePictureInput = document.getElementById('profilePictureInput');
+    const profilePicturePreview = document.getElementById('profilePicturePreview');
+    const cropperImage = document.getElementById('cropperImage');
+    const cropModal = document.getElementById('cropModal');
+    const overlay = document.getElementById('overlay');
+    const croppedImageInput = document.getElementById('croppedImageInput');
+    let cropper;
+    const minZoom = 1;
+    const maxZoom = 3;
+
+    profilePictureInput.addEventListener('change', function (event) {
+        const file = event.target.files[0];
+        const reader = new FileReader();
+
+        reader.onload = function (e) {
+            cropperImage.src = e.target.result;
+            cropModal.style.display = 'block';
+            overlay.style.display = 'block';
+
+            // Initialize cropper
+            cropper = new Cropper(cropperImage, {
+                aspectRatio: 1,
+                viewMode: 1,
+                autoCropArea: 1,
+                movable: true,
+                zoomable: true,
+                rotatable: true,
+                scalable: true,
+                dragMode: 'move',
+                minCropBoxWidth: 150,
+                minCropBoxHeight: 150,
+                cropBoxMovable: false,
+                cropBoxResizable: false,
+                ready: function () {
+                    // Set initial zoom level
+                    cropper.zoomTo(minZoom);
+                }
+            });
+
+            cropperImage.addEventListener('wheel', function (e) {
+                e.preventDefault();
+                const zoomFactor = 0.1;
+                let newZoom = cropper.getData().scaleX + (e.deltaY < 0 ? zoomFactor : -zoomFactor);
+                newZoom = Math.max(minZoom, Math.min(newZoom, maxZoom));
+                cropper.zoomTo(newZoom);
+            });
+        };
+        reader.readAsDataURL(file);
+    });
+
+    document.getElementById('cropButton').addEventListener('click', function () {
+        const canvas = cropper.getCroppedCanvas({
+            width: 800,
+            height: 800,
+        });
+
+
+
+
+        const imageUrl = canvas.toDataURL()
+        document.getElementById('profilePicturePreview').src = imageUrl;
+
+        canvas.toBlob(function (blob) {
+            // Convert Blob to a URL-safe base64 string and store it in the hidden input field
+            const reader = new FileReader();
+            reader.onloadend = function () {
+                croppedImageInput.value = reader.result;
+            };
+            reader.readAsDataURL(blob);
+        }, 'image/png');
+
+        cropper.destroy();
+        cropModal.style.display = 'none';
+        overlay.style.display = 'none';
+    });
+
+    document.getElementById('cancelButton').addEventListener('click', function () {
+        cropper.destroy();
+        cropModal.style.display = 'none';
+        overlay.style.display = 'none';
+    });
+</script>

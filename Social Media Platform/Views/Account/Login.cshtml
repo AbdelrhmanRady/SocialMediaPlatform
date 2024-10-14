@@ -1,0 +1,35 @@
+﻿@model LoginViewModel
+
+@{
+    ViewData["Title"] = "Login Page";
+}
+<link rel="stylesheet" href="~/css/login.css" asp-append-version="true" />
+<div class="loginContainer">
+    <form class="loginForm bg-light" method="post">
+        <div asp-validation-summary="All" class="text-danger"></div>
+        <div class="mb-3">
+            <label asp-for="Email" class="form-label">Email address</label>
+            <input class="form-control" asp-for="Email">
+        </div>
+        <div class="mb-3">
+            <label asp-for="password" class="form-label">Password</label>
+            <input class="form-control" asp-for="password" type="password">
+        </div>
+        <div class="mb-3 form-check">
+            <input asp-for="RememberMe" class="form-check-input" id="exampleCheck1">
+            <label class="form-check-label" asp-for="RememberMe">Remember Me</label>
+        </div>
+        <button type="submit" class="btn btn-primary">Login</button>
+        <a asp-action="Register" asp-controller="Account">Don't have an account?</a>
+        <a asp-action="ForgotPassword" asp-controller="Account">Forgot your password?</a>
+    </form>
+
+    <form class="ExternalLoginForm" method="post" asp-action="ExternalLogin" asp-controller="Account" asp-route-ReturnUrl="@Model.ReturnUrl">
+        <button name="provider" value="Google" type="submit" class="btn text-white">
+            Sign in with Google <i class="fa-brands fa-google"></i>
+        </button>
+        <button name="provider" value="Facebook" type="submit" class="btn text-white">
+            Sign in with Facebook <i class="fa-brands fa-facebook"></i>
+        </button>
+    </form>
+</div>
