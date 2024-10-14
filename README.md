@@ -96,29 +96,24 @@ The platform supports uploading multiple media types (images, videos, and GIFs) 
 
 ## Project Structure
 
-\`\`\`
+```
 |-- Controllers
-|   |-- AccountController.cs       # Handles login, registration, and security
-|   |-- ProfileController.cs       # Handles user profile display and editing
-|   |-- PostsController.cs         # Manages posts, comments, reactions, and media uploads
-|   |-- FriendsController.cs       # Handles friend requests and friend management
-|
+    |-- AccountController.cs     # Handles login, registration, and security
+    |-- ProfileController.cs     # Handles user profile display and editing
+    |-- PostsController.cs       # Manages posts, comments, reactions, and media uploads
+    |-- FriendsController.cs     # Handles friend requests and friend management
 |-- Models
-|   |-- User.cs                    # User model with profile details, settings
-|   |-- Post.cs                    # Post model with support for media (images, videos)
-|   |-- Comment.cs                 # Comment model
-|
+    |-- User.cs                  # User model with profile details, settings
+    |-- Post.cs                  # Post model with support for media (images, videos)
+    |-- Comment.cs               # Comment model
 |-- Views
-|   |-- Account/
-|   |-- Profile/
-|   |-- Posts/
-|
+    |-- Account/
+    |-- Profile/
+    |-- Posts/
 |-- wwwroot
-|   |-- css/                       # Custom styles
-|   |-- js/                        # Custom scripts
-|   |-- media/                     # Uploaded media files
-\`\`\`
-
----
+    |-- css/                     # Custom styles
+    |-- js/                      # Custom scripts
+    |-- media/                   # Uploaded media files
+```
 
 
